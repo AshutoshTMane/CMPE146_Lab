@@ -72,11 +72,11 @@ int main(void)
     printf("Checksum: %08X\n", *checkSumPtr);
 
     // Set currentAddress to first TLV block address (if any)
-    uint32_t* currentAddress = checkSumPtr + 7; // This may need to be 0x1C
+    uint32_t* currentAddress = ++checkSumPtr; // The currentAddress should be the address right after the CheckSum
 
     // Use for-loop to iterate until the currentAddress matches the endWord address
     // Iterate using ++ because this is a pointer variable and not integer
-    for (; currentAddress < endWordPtr; currentAddress++){
+    for (; currentAddress < endWordPtr;){
         if (currentAddress >= endWordPtr) break; // Included this line in case the next address is the End Word
 
         // Save the values of tag and length in a variable for printing and later for-loop
@@ -87,7 +87,8 @@ int main(void)
         currentAddress++;
 
         // Print previous values
-        printf("Tag: %08X Length: %08X ", tag, length);
+        printf("Tag: %08X Length: %08X Data Values: ", tag, length);
+
 
         // Iterate through data block with 'length' as the upper bound, printing each data value
         int i = 0;
