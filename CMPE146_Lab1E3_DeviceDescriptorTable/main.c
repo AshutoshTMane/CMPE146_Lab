@@ -77,24 +77,29 @@ int main(void)
     // Use for-loop to iterate until the currentAddress matches the endWord address
     // Iterate using ++ because this is a pointer variable and not integer
     for (; currentAddress < endWordPtr; currentAddress++){
-        if (currentAddress >= endWordPtr) break;
+        if (currentAddress >= endWordPtr) break; // Included this line in case the next address is the End Word
 
+        // Save the values of tag and length in a variable for printing and later for-loop
         uint32_t tag = *currentAddress;
         currentAddress++;
 
         uint32_t length = *currentAddress;
         currentAddress++;
 
+        // Print previous values
         printf("Tag: %08X Length: %08X ", tag, length);
 
+        // Iterate through data block with 'length' as the upper bound, printing each data value
         int i = 0;
         for (; i < length; i++){
             printf("%08X ", *currentAddress);
             currentAddress++;
         }
+        // Enter newline for the next TLV block
         printf("\n");
     }
 
+    // Print End Word
     printf("End Word: %08X\n", *endWordPtr);
 
     return 0;
