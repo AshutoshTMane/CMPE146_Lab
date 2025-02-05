@@ -101,7 +101,7 @@ int main(void)
     }
 
     // Print End Word
-    printf("End Word: %08X\n", *endWordPtr);
+    printf("End Word: %08X\n", *currentAddress);
 
     return 0;
 }
