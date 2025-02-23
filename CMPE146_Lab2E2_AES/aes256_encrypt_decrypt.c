@@ -9,15 +9,17 @@
 #include <string.h>
 
 /* Statics */
+// Original data to encrypt
 static uint8_t Data[16] =
 { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc,
         0xdd, 0xee, 0xff };
+// AES-256 encryption key (256 bits = 32 bytes)
 static uint8_t CipherKey[32] =
 { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c,
         0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
         0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f };
-static uint8_t DataAESencrypted[16];       // Encrypted data
-static uint8_t DataAESdecrypted[16];       // Decrypted data
+static uint8_t DataAESencrypted[16]; // Array to store the encrypted data
+static uint8_t DataAESdecrypted[16]; // Array to store the decrypted data
 
 
 int main(void)
@@ -41,15 +43,17 @@ int main(void)
     MAP_AES256_decryptData(AES256_BASE, DataAESencrypted, DataAESdecrypted);
     //![Simple AES256 Example]
     
-    uint8_t i = 0;
+    uint8_t i = 0; // Loop counter
 
+    // Print the original data
     printf("Input Data: ");
     for (i = 0; i < 16; i++)
         {
-        printf("%02X ", Data[i]);
+        printf("%02X ", Data[i]); // Printing out each byte in hexadecimal
         }
     printf("\n");
 
+    // Print the encrypted data
     printf("Encrypted Data: ");
     for (i = 0; i < 16; i++)
         {
@@ -68,6 +72,6 @@ int main(void)
     /* Array DataAESdecrypted should now contain the same data as array Data */
     while(1)
     {
-        MAP_PCM_gotoLPM0();
+        MAP_PCM_gotoLPM0(); // This is used to transition to Low Power Mode 0 (LPM0) to save power while the program is idle
     }
 }
