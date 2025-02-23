@@ -22,6 +22,8 @@ int main(void)
 
     uint8_t* button_alias = (uint8_t*) ((port_module + port1_in - port_addr) * 32 + (1 * 4) + alias_addr);
     uint8_t* led_alias = (uint8_t*) ((port_module + port2_out - port_addr) * 32  + (4 * 2) + alias_addr);
+    printf (" button: %08x \t led %08x \n", button_alias, led_alias);
+
 
     /* Halting the Watchdog */
     MAP_WDT_A_holdTimer();
